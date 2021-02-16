@@ -3,7 +3,7 @@ const tableauScraper = require("./tableau-scraper");
 
 async function main(path) {
   const host = "https://public.tableau.com";
-  const slug = "COVID-19VaccineTracker-DailyNYCUpdate-adultsvaccinatedinNYC/AllAdults";
+  const slug = "COVID-19VaccinationTracker/AllAdults";
 
   const config = await tableauScraper.queryConfig(host, slug);
   const [info, data] = await tableauScraper.queryData(host, config);
