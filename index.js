@@ -19,7 +19,7 @@ async function downloadData(path, slug, tableKey) {
 };
 
 try {
-  downloadData("vaccine-data.json", "COVID-19VaccineTrackerDashboard_16153822244270/AllAdults", "NYC v NON NYC overall");
+  downloadData("vaccine-data.json", "COVID-19VaccineTrackerDashboard_16153822244270/AllPeopleVaccination", "NYC v NON NYC overall");
   downloadData("map-data.json", "COVID-19VaccineTrackerDashboard_16153822244270/Geography", "Map ZIP");
 } catch (e) {
   console.error(e);
