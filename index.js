@@ -10,7 +10,7 @@ async function downloadData(path, host, slug, tableKey) {
   
   if (views[tableKey]) {
     const data = await (host === nysHost
-      ?  tableauScraper.queryTableServer(host, config, views[tableKey])
+      ? tableauScraper.queryTableServer(host, config, views[tableKey])
       : tableauScraper.queryTablePublic(host, config, views[tableKey]));
   
     console.log(`Saving "${tableKey}" from ${slug} to ${path}`);
@@ -25,7 +25,7 @@ async function main() {
     await Promise.all([
       downloadData("vaccine-data.json", publicHost, "COVID-19VaccineTrackerDashboard_16153822244270/AllPeopleVaccination", "NYC v NON NYC overall"),
       downloadData("map-data.json", publicHost, "COVID-19VaccineTrackerDashboard_16153822244270/Geography", "Map ZIP"),
-      downloadData("hospitalization-data.json", nysHost, "DailyHospitalizationSummary/Reopening-DailyHospitalization", "Chart (2)")
+      // downloadData("hospitalization-data.json", nysHost, "DailyHospitalizationSummary/Reopening-DailyHospitalization", "Chart (2)")
     ]);
   } catch (e) {
     console.error(e);
