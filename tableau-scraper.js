@@ -40,13 +40,29 @@ async function queryData (host, config) {
   return jsonStrings.slice(1).map(string => JSON.parse(string));
 }
 
-async function queryTable (host, config, id) {
+async function queryTablePublic (host, config, id) {
   const path = `${config["vizql_root"]}/vudcsv/sessions/${config["sessionid"]}/views/${id}`;
 
   const request = await axios.get(path, {
     baseURL: host,
     params: {
       "showall": "true"
+    }
+  });
+
+  return parse(request.data, {
+    columns: header => header.map(column => slugify(column))
+  });
+}
+
+async function queryTableServer (host, config, id) {
+  const path = `${config["vizql_root"]}/vud/sessions/${config["sessionid"]}/views/${id}`;
+
+  const request = await axios.get(path, {
+    baseURL: host,
+    params: {
+      "showall": "true",
+      "csv": "true"
     }
   });
 
@@ -136,6 +152,7 @@ function parseVisuals (data) {
 module.exports = {
   queryConfig,
   queryData,
-  queryTable
+  queryTablePublic,
+  queryTableServer
 }
 
