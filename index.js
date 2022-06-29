@@ -28,7 +28,12 @@ async function main() {
       // downloadData("hospitalization-data.json", nysHost, "DailyHospitalizationSummary/Reopening-DailyHospitalization", "Chart (2)")
     ]);
   } catch (e) {
-    console.error(e);
+    if (e.request) {
+      const url = new URL(e.request.path, `${e.request.protocol}//${e.request.host}`);
+      console.error(e.message, url.href);
+    } else {
+      console.error(e.message);
+    }
   }
 }
 
